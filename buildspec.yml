@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - pip install --upgrade awscli
+      - aws --version
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 326089275426.dkr.ecr.us-east-2.amazonaws.com
+
+  build:
+    commands:
+      - echo Building the Docker image...          
+      - docker build .
+      - docker tag frontend:latest 326089275426.dkr.ecr.us-east-2.amazonaws.com/frontend:latest      
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push 326089275426.dkr.ecr.us-east-2.amazonaws.com/frontend:latest
