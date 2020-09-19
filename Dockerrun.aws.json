@@ -1,4 +1,13 @@
-"Image": {
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
     "Name": "326089275426.dkr.ecr.us-east-2.amazonaws.com/frontend",
     "Update": "true"
   },
+  "Ports": [
+    {
+      "ContainerPort": 80,
+      "HostPort": 80
+    }
+  ]
+}
